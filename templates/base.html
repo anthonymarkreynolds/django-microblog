@@ -7,6 +7,11 @@
     <meta charset="UTF-8">
     <title>{% block title %}Posts{% endblock %}</title>
 </head>
+<style>
+    body {
+        padding-top: 65px;
+    }
+</style>
 <body>
     {# Load the tag library #}
     {% load django_bootstrap5 %}
@@ -18,7 +23,7 @@
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
 
-    <nav class="navbar navbar-expand-lg shadow-sm bg-light border-bottom border-secondary">
+    <nav class="fixed-top navbar navbar-expand-lg shadow-sm bg-light border-bottom border-secondary">
     <div class="container-fluid ">
         <a class="navbar-brand" href="{% url 'posts:post-list' %}">µblog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

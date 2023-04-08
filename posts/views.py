@@ -9,8 +9,9 @@ from .forms import PostForm
 
 # @login_required
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'posts': posts})
+    latest_posts = Post.objects.order_by('-created_at')[:10]
+    context = {'latest_posts': latest_posts}
+    return render(request, 'posts/post_list.html', context)
 
 
 class PostDetailView(DetailView):
