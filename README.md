@@ -40,16 +40,19 @@ You should now be able to access the app at `http://localhost:8000/`.
 In this project, I learned about various Django concepts, including:
 
 - How to use the built-in authentication and authorization functionality to secure parts of the app
+- How to add authentication and authorization to views using Django's `login_required` decorator and `UserPassesTestMixin`.
+- How to handle user-specific data with mixins like `LoginRequiredMixin` and `UserPassesTestMixin`.
 - How to use Django's form classes to handle user input and validation
 - URL routing using `urls.py`
-- Views and generic views
-- Templates and template tags
-- Custom filters
-- Bootstrap 5 Intergration
+- How to use Django's built-in class-based views such as `ListView`, `DetailView`, `CreateView`, `UpdateView`, and `DeleteView`.
+- How to use Django's template tags such as `{% url %}`, `{% csrf_token %}`, and `{% if %}`.
+- How to create and use Django forms to handle user input.
+- How to create custom template filters
+- How to use Bootstrap 5 to style Django templates.
 - Models and database interactions
-- `__init__.py` and package management
-- `reverse` and `reverse_lazy`
-- Caching using Django's cache framework
+- How to organize code in Django apps and use `__init__.py` files to make code more modular.
+- How to use Django's `reverse` and `reverse_lazy` functions to generate URLs dynamically.
+- How to use caching to speed up website performance.
 
 ### Third-Party Libraries
 
