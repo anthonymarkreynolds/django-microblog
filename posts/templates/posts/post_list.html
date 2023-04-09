@@ -9,6 +9,7 @@
             <h5 class="card-title">{{ post.title }}</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">Author: {{post.author}}</h6>
             <div class="card-text">{{post.html|safe|truncatewords:10}}</div>
+             {% include 'posts/post_actions.html' with post=post %}
             <a href="{% url 'posts:post-detail' pk=post.pk %}" class="card-link">Read now</a>
           </div>
         </div>

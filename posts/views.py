@@ -3,12 +3,16 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 from .models import Post, Like
 from .forms import PostForm
 
+class PostAuthorMixin(UserPassesTestMixin):
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
-# @login_required
 def post_list(request):
     latest_posts = Post.objects.order_by('-created_at')[:10]
     context = {'latest_posts': latest_posts}
@@ -19,7 +23,7 @@ class PostDetailView(DetailView):
     model = Post
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     success_url = '/posts/'
@@ -29,12 +33,12 @@ class PostCreateView(CreateView):
         return super().form_valid(form)
 
 
-class PostUpdateView(UpdateView):
-    mode = Post
+class PostUpdateView(PostAuthorMixin, UpdateView):
+    model = Post
     form_class = PostForm
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(PostAuthorMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('post-list')
 

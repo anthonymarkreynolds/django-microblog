@@ -8,6 +8,7 @@
     <h3>Author: {{post.author}}</h3>
     <h5>Posted on: {{post.created_at}}</h5>
     <h6>Likes: {{post.get_like_count}}</h6>
+    {% include 'posts/post_actions.html' with post=post %}
     {% if user.is_authenticated %}
         <form method="post" action="{% url 'posts:like-post' pk=post.pk %}">
           {% csrf_token %}
