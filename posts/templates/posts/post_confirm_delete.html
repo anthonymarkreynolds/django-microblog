@@ -7,6 +7,7 @@
   <form action="{% url 'posts:post-delete' post.pk %}" method="post" class="d-inline">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'posts:post-detail' pk=object.pk %}" class="btn btn-secondary">Cancel</a>
   </form>
 {% endif %}
 {% endblock %}

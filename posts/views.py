@@ -8,10 +8,12 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from .models import Post, Like
 from .forms import PostForm
 
+
 class PostAuthorMixin(UserPassesTestMixin):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
+
 
 def post_list(request):
     latest_posts = Post.objects.order_by('-created_at')[:10]
