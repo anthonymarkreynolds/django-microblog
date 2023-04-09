@@ -40,7 +40,7 @@ class PostUpdateView(PostAuthorMixin, UpdateView):
 
 class PostDeleteView(PostAuthorMixin, DeleteView):
     model = Post
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('posts:post-list')
 
 
 @login_required

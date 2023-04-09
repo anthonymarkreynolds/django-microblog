@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if request.user.is_authenticated and post.author == request.user %}
+  <h1>Are you sure you want to delete {{post.title}}</h1>
+  <a href="{% url 'posts:post-update' post.pk %}" class="btn btn-primary">Edit</a>
+  <form action="{% url 'posts:post-delete' post.pk %}" method="post" class="d-inline">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+{% endif %}
+{% endblock %}

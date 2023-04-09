@@ -8,11 +8,10 @@
     <h3>Author: {{post.author}}</h3>
     <h5>Posted on: {{post.created_at}}</h5>
     <h6>Likes: {{post.get_like_count}}</h6>
-    {% include 'posts/post_actions.html' with post=post %}
     {% if user.is_authenticated %}
         <form method="post" action="{% url 'posts:like-post' pk=post.pk %}">
           {% csrf_token %}
-          <button type="submit">
+          <button class="btn btn-primary" type="submit">
             {% if not user|has_liked:post %}
               Like
             {% else %}
@@ -21,8 +20,9 @@
           </button>
         </form>
     {% else %}
-      <p><a href="{% url 'login' %}">Log in</a> to like this post.</p>
+      <p><a class="btn btn-primary" href="{% url 'accounts:login' %}">Log in</a> to like this post.</p>
     {% endif %}
+    {% include 'posts/post_actions.html' with post=post %}
 </div>
 <div class="container-md p-4 border border-secondary">
   {{post.html|safe}}

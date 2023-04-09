@@ -2,19 +2,24 @@
 
 {% block content %}
   <h1>Latest Posts</h1>
-  <ul>
+  <div class="row row-cols-1 row-cols-lg-2 g-2">
     {% for post in latest_posts %}
-      <div class="card mb-3" >
+      <div class="px-2 col">
+        <div class="card shadow-sm border-secondary">
           <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">Author: {{post.author}}</h6>
+            <h6 class="card-subtitle mb-2 text-body-secondary">Likes: {{post.get_like_count}}</h6>
+            <hr>
             <div class="card-text">{{post.html|safe|truncatewords:10}}</div>
-             {% include 'posts/post_actions.html' with post=post %}
-            <a href="{% url 'posts:post-detail' pk=post.pk %}" class="card-link">Read now</a>
+            <a href="{% url 'posts:post-detail' pk=post.pk %}" class="btn btn-primary card-link">Read now</a>
+            <br>
+            {% include 'posts/post_actions.html' with post=post %}
           </div>
         </div>
+      </div>
     {% empty %}
       <li>No posts yet.</li>
     {% endfor %}
-  </ul>
+      </div>
 {% endblock %}
