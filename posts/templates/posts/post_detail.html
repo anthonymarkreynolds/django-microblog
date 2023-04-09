@@ -1,11 +1,27 @@
 <!-- post_list.html -->
 {% extends 'base.html' %}
+{% load custom_filters %}
 
 {% block content %}
 <div class="container bg-secondary text-white p-4">
     <h1>{{post.title}}</h1>
     <h3>Author: {{post.author}}</h3>
     <h5>Posted on: {{post.created_at}}</h5>
+    <h6>Likes: {{post.get_like_count}}</h6>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'posts:like-post' pk=post.pk %}">
+          {% csrf_token %}
+          <button type="submit">
+            {% if not user|has_liked:post %}
+              Like
+            {% else %}
+                Unlike
+            {% endif %}
+          </button>
+        </form>
+    {% else %}
+      <p><a href="{% url 'login' %}">Log in</a> to like this post.</p>
+    {% endif %}
 </div>
 <div class="container-md p-4 border border-secondary">
   {{post.html|safe}}

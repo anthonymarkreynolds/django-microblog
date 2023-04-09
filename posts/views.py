@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from .models import Post
+from .models import Post, Like
 from .forms import PostForm
 
 
@@ -36,3 +37,21 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy('post-list')
+
+
+@login_required
+def like_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    user = request.user
+
+    # Check if the user has already liked the post
+    try:
+        like = Like.objects.get(post=post, user=user)
+        like.delete()
+    except Like.DoesNotExist:
+        # Create a new like for the post
+        like = Like(post=post, user=user)
+        like.save()
+
+    # Redirect back to the post detail page
+    return redirect(reverse_lazy('posts:post-detail', kwargs={'pk': pk}))
