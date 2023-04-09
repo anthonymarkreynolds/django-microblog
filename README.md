@@ -4,12 +4,15 @@ This is a sample microblog app built with Django, designed to help me learn more
 
 ## Features
 
-The app includes the following features:
+The project includes the following features:
 
-- User authentication and authorization
-- Posting and displaying short messages
-- Commenting and liking posts
-- Markdown support for post and comment text
+- [x] accounts: This app would handle user authentication and registration, as well as user profiles and settings.
+- [x] posts: This app would handle creating and displaying posts, as well as commenting and liking posts.
+    - [x] Markdown support for post and comment text
+- notifications: This app would handle sending notifications to users when they receive new followers, comments, or likes.
+- search: This app would handle searching for posts and users within the microblog.
+- hashtags: This app would handle parsing hashtags in posts and allowing users to search for posts by hashtag.
+- api: This app would provide an API for other developers to build apps that interact with the microblog.
 
 ## Requirements
 
@@ -41,6 +44,7 @@ In this project, I learned about various Django concepts, including:
 - URL routing using `urls.py`
 - Views and generic views
 - Templates and template tags
+- Custom filters
 - Bootstrap 5 Intergration
 - Models and database interactions
 - `__init__.py` and package management
