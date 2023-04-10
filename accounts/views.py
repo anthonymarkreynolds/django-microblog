@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.views.generic import DetailView, ListView
+from django.core.paginator import Paginator
 
 
-# Create your views here.
+class UserProfileView(DetailView):
+    model = User
+    template_name = 'accounts/user_profile.html'
+    context_object_name = 'user'
+
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
